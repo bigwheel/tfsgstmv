@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"os"
 
 	"github.com/hashicorp/hcl/v2/hclsimple"
 )
@@ -12,12 +13,17 @@ type Moved struct {
 }
 
 func main() {
-	// fmt.Println("hello, world")
+	os.Exit(run())
+}
 
-	var moved Moved
-	err := hclsimple.DecodeFile("moved.hcl", nil, &moved)
-	if err != nil {
-		log.Fatalf("Failed to load configuration: %s", err)
-	}
-	// fmt.Printf("%#v", moved)
+func run() int {
+		// fmt.Println("hello, world")
+
+		var moved Moved
+		err := hclsimple.DecodeFile("moved.hcl", nil, &moved)
+		if err != nil {
+			log.Fatalf("Failed to load configuration: %s", err)
+		}
+		// fmt.Printf("%#v", moved)
+		return 0
 }

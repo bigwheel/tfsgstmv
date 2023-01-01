@@ -1,20 +1,16 @@
 package main
 
-import (
-	"testing"
-)
+import "flag"
 
-func TestNoFiles(t *testing.T) {
-	main()
-}
-
-func ExampleMain_no_moved() {
-	main()
+func Example_run_no_moved() {
+	flag.CommandLine.Set("target", "1")
+	run()
 	// Output:
 }
 
-func ExampleMain_one_moved() {
-	main()
+func Example_run_one_moved() {
+	flag.CommandLine.Set("target", "1")
+	run()
 	// Output:
 	// moved {
 	//   from =

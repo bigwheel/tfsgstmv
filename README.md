@@ -1,3 +1,3 @@
-# tfguessmv
+# tfsgstmv
 
-Guess and output `moved` block.
+Suggest `moved` block.

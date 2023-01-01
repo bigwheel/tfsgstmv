@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"log"
 	"os"
 
@@ -17,13 +18,14 @@ func main() {
 }
 
 func run() int {
-		// fmt.Println("hello, world")
+	flag.Parse()
+	// fmt.Println("hello, world")
 
-		var moved Moved
-		err := hclsimple.DecodeFile("moved.hcl", nil, &moved)
-		if err != nil {
-			log.Fatalf("Failed to load configuration: %s", err)
-		}
-		// fmt.Printf("%#v", moved)
-		return 0
+	var moved Moved
+	err := hclsimple.DecodeFile("moved.hcl", nil, &moved)
+	if err != nil {
+		log.Fatalf("Failed to load configuration: %s", err)
+	}
+	// fmt.Printf("%#v", moved)
+	return 0
 }

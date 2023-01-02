@@ -1,4 +1,4 @@
-module github.com/bigwheel/tfguessmv
+module github.com/bigwheel/tfsgstmv
 
 go 1.19
 

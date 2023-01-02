@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"log"
 	"os"
 
@@ -19,6 +20,7 @@ func main() {
 
 func run() int {
 	flag.Parse()
+	fmt.Println(flag.Args())
 	// fmt.Println("hello, world")
 
 	var moved Moved

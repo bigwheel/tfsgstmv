@@ -7,8 +7,6 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
-
-	"github.com/bigwheel/tfsgstmv/internal/terraform/command/jsonplan"
 )
 
 type Moved struct {
@@ -19,11 +17,6 @@ type Moved struct {
 func main() {
 	os.Exit(run())
 }
-
-// type plan struct {
-// 	FormatVersion    string      `json:"format_version,omitempty"`
-// 	TerraformVersion string      `json:"terraform_version,omitempty"`
-// }
 
 func run() int {
 	flag.Parse()

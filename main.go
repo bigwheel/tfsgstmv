@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"flag"
 	"fmt"
 	"io"
@@ -51,8 +50,7 @@ func run() int {
 		return 1
 	}
 
-	var p jsonplan.plan
-	json.Unmarshal(txt, &p)
+	p := jsonplan.Unmarshal(txt)
 
 	fmt.Printf("%#v", p)
 	// var moved Moved

@@ -9,7 +9,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/bigwheel/tfguessmv/internal/terraform/command/jsonplan"
+	"github.com/bigwheel/tfsgstmv/internal/terraform/command/jsonplan"
 )
 
 type Moved struct {

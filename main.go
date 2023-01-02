@@ -7,6 +7,8 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+
+	"github.com/bigwheel/tfsgstmv/jsonplan"
 )
 
 type Moved struct {
@@ -28,22 +30,26 @@ func run() int {
 	}
 	var r io.Reader
 	switch filename {
-		case "", "-":
-			r = os.Stdin
-		default:
-			f, err := os.Open(filename)
-			if err != nil {
-				return 1
-			}
-			defer f.Close()
-			r = f
+	case "", "-":
+		r = os.Stdin
+	default:
+		f, err := os.Open(filename)
+		if err != nil {
+			return 1
+		}
+		defer f.Close()
+		r = f
 	}
-	txt, err:= ioutil.ReadAll(r)
+	txt, err := ioutil.ReadAll(r)
 	if err != nil {
 		return 1
 	}
 
-	p := jsonplan.Unmarshal(txt)
+	err, p := jsonplan.Unmarshal(txt)
+
+	if err != nil {
+		return 1
+	}
 
 	fmt.Printf("%#v", p)
 	// var moved Moved

@@ -5,8 +5,8 @@ import (
 	"log"
 	"os"
 
-	"github.com/hashicorp/hcl/v2/hclsimple"
 	"github.com/bigwheel/tfsgstmv/tfsgstmv"
+	"github.com/hashicorp/hcl/v2/hclsimple"
 )
 
 func Example_run_no_moved() {

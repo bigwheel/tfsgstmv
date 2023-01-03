@@ -6,18 +6,18 @@ import (
 	"os"
 
 	"github.com/hashicorp/hcl/v2/hclsimple"
+	"github.com/bigwheel/tfsgstmv/tfsgstmv"
 )
 
 func Example_run_no_moved() {
-	// var moved Moved
-	var gf GeneratedFile
+	var gf tfsgstmv.GeneratedFile
 	err := hclsimple.DecodeFile("moved.hcl", nil, &gf)
 	fmt.Printf("%#v\n", gf)
 	if err != nil {
 		log.Fatalf("Failed to load configuration: %s", err)
 	}
 	os.Args = []string{"", "testcase/no-change/plan.json"}
-	run()
+	tfsgstmv.Run()
 	// Output:
 }
 

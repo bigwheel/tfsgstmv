@@ -2,32 +2,25 @@ package main
 
 import (
 	"fmt"
-	"log"
-	"os"
+	"reflect"
+	"testing"
 
 	"github.com/bigwheel/tfsgstmv/tfsgstmv"
 	"github.com/hashicorp/hcl/v2/hclsimple"
 )
 
-func Example_run_no_moved() {
-	var gf tfsgstmv.GeneratedFile
-	err := hclsimple.DecodeFile("moved.hcl", nil, &gf)
-	fmt.Printf("%#v\n", gf)
+func Test_run_no_moved(t *testing.T) {
+	actual := tfsgstmv.GenerateMoveds("testcase/no-change/plan.json")
+
+	var expectedFile tfsgstmv.GeneratedFile
+	err := hclsimple.DecodeFile("testcase/no-change/expected-moved.hcl", nil, &expectedFile)
 	if err != nil {
-		log.Fatalf("Failed to load configuration: %s", err)
+		t.Fatalf("Failed to load configuration: %s", err)
 	}
-	os.Args = []string{"", "testcase/no-change/plan.json"}
-	tfsgstmv.Run()
-	// Output:
+	expected := expectedFile.Moveds
+	fmt.Printf("%#v\n", expected)
+
+	if !reflect.DeepEqual(actual, expected) {
+		t.Fatalf("Actual: %#v\nExpected: %#v", actual, expected)
+	}
 }
-
-// func Example_run_one_moved() {
-
-// 	flag.CommandLine.Set("target", "1")
-// 	run()
-// 	// Output:
-// 	// moved {
-// 	//   from =
-// 	//   to =
-// 	// }
-// }

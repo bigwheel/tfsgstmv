@@ -26,6 +26,10 @@ func createReader(filename string) (io.Reader, error) {
 	}
 }
 
+func GenerateMoveds(filepath string) []Moved {
+	return nil
+}
+
 func Run() int {
 	flag.Parse()
 

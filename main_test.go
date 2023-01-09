@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"reflect"
 	"testing"
 
@@ -9,18 +8,28 @@ import (
 	"github.com/hashicorp/hcl/v2/hclsimple"
 )
 
-func Test_run_no_moved(t *testing.T) {
-	actual := tfsgstmv.GenerateMoveds("testcase/no-change/plan.json")
-
-	var expectedFile tfsgstmv.GeneratedFile
-	err := hclsimple.DecodeFile("testcase/no-change/expected-moved.hcl", nil, &expectedFile)
-	if err != nil {
-		t.Fatalf("Failed to load configuration: %s", err)
+func Test(t *testing.T) {
+	tests := []struct {
+		testcaseName string
+	}{
+		{testcaseName: "no-change"},
+		{testcaseName: "resource-name-change"},
 	}
-	expected := expectedFile.Moveds
-	fmt.Printf("%#v\n", expected)
 
-	if !reflect.DeepEqual(actual, expected) {
-		t.Fatalf("Actual: %#v\nExpected: %#v", actual, expected)
+	for _, tt := range tests {
+		t.Run(tt.testcaseName, func(t *testing.T) {
+			actual := tfsgstmv.GenerateMoveds("testcase/" + tt.testcaseName + "/plan.json")
+
+			var expectedFile tfsgstmv.GeneratedFile
+			err := hclsimple.DecodeFile("testcase/"+tt.testcaseName+"/expected-moved.hcl", nil, &expectedFile)
+			if err != nil {
+				t.Fatalf("Failed to load configuration: %s", err)
+			}
+			expected := expectedFile.Moveds
+
+			if !reflect.DeepEqual(actual, expected) {
+				t.Fatalf("Actual: %#v\nExpected: %#v", actual, expected)
+			}
+		})
 	}
 }
